@@ -1,19 +1,68 @@
-import RingBuffer from './RingBuffer2'
+import {RingBuffer, RingReader} from './RingBuffer3'
+
+// const ring = new RingBuffer(2)
+// ring.write(1)
+//
+// const readerA = new RingReader(ring)
+// const readerB = new RingReader(ring)
+//
+// console.log(readerA.read())
+// console.log(readerB.read())
+
+// (function(){
+//
+// console.log('Test 6')
+//
+// const ring = new RingBuffer(2)
+// ring.write(1)
+//
+// const readerA = new RingReader(ring)
+// const readerB = new RingReader(ring)
+//
+// expect(readerA.read()).toBe(1)
+// expect(readerB.read()).toBe(1)
+//
+// ring.write(2)
+//
+// expect(readerA.read()).toBe(2)
+// expect(readerB.read()).toBe(2)
+//
+// console.log('Test passed.')
+//
+// }())
+
+
+//===================
 
 //
-const cb = new RingBuffer(4)
-cb.write(5)
-cb.write(4)
-cb.write(3)
-cb.write(2)
-cb.write(1)
-cb.write(0)
+// const cb = new RingBuffer(4)
+// cb.write(10)
+// cb.write(9)
+// cb.write(8)
+// cb.write(7)
 // cb.write(6)
-cb.read()
+// cb.write(5)
+// cb.write(5)
+// // cb.write(4)
+// // cb.write(3)
+// // cb.write(2)
+// // cb.write(1)
+// cb.read()
+// cb.read()
+// cb.read()
+// cb.read()
+// cb.read()
+// // cb.write('x')
+// // cb.write('y')
+// // cb.write('z')
+// // cb.read()
+// // cb.read()
+// // cb.read()
 
-cb.read()
 
-cb.read()
+
+//===================
+
 //
 // (function(){
 //
@@ -116,15 +165,10 @@ cb.read()
 // ring.write(10)
 //
 // expect(ring.read()).toBe(1)
-// console.log('check 1')
 // expect(ring.read()).toBe(2)
-// console.log('check 2')
 // expect(ring.read()).toBe(3)
-// console.log('check 3')
 // expect(ring.read()).toBe(4)
-// console.log('check 4')
 // expect(ring.read()).toBe(5)
-// console.log('check 5')
 //
 // ring.write('x')
 // ring.write('y')
@@ -143,7 +187,7 @@ cb.read()
 // console.log('Test passed.')
 //
 // }());
-//
+// //
 // (function(){
 //
 // console.log('Test 6')
@@ -164,81 +208,81 @@ cb.read()
 //
 // console.log('Test passed.')
 //
-// }());
-//
-// (function(){
-//
-// console.log('Test 7')
-//
-//
-// const ring = new RingBuffer(2)
-// ring.write(1)
-// ring.write(2)
-//
-// const readerA = new RingReader(ring)
-//
-// expect(readerA.read()).toBe(1)
-// expect(readerA.read()).toBe(2)
-//
-// const readerB = new RingReader(ring)
-//
-// expect(readerB.read()).toBe(1)
-// expect(readerB.read()).toBe(2)
-//
-// console.log('Test passed.')
-//
-// }());
-//
-// (function(){
-//
-// console.log('Test 8')
-//
-// const ring = new RingBuffer(2)
-// ring.write(1)
-// ring.write(2)
-//
-// const readerA = new RingReader(ring)
-//
-// expect(readerA.read()).toBe(1)
-// expect(readerA.read()).toBe(2)
-//
-// ring.write(3)
-//
-// const readerB = new RingReader(ring)
-//
-// expect(readerB.read()).toBe(2)
-// expect(readerB.read()).toBe(3)
-//
-// expect(readerA.read()).toBe(3)
-//
-// console.log('Test passed.')
-//
-// }());
-//
-// (function(){
-//
-// console.log('Load test 9.')
-//
-// // Load test, read in order, with a random capacity between 9mm-10mm
-// const min = 90000000,
-// max = 100000000,
-// random_capacity = Math.floor(Math.random() * (max - min + 1)) + min
-//
-// const ring = new RingBuffer(random_capacity)
-//
-// const start = new Date().getTime()
-//
-// // Fill must fill the random capacity
-// for ( let x = 0; x < random_capacity; x ++){
-// ring.write(x)
-// }
-//
-// // Read the random capacity, in order
-// for ( let y = 0; y < random_capacity; y ++){
-// expect(ring.read()).toBe(y)
-// }
-//
-// const end = new Date().getTime()
-// console.log('Test passed, ' + random_capacity + ' executions in ' + (end - start) + 'ms' )
-//
 // }())
+
+// (function(){
+// //
+// // console.log('Test 7')
+// //
+// //
+// // const ring = new RingBuffer(2)
+// // ring.write(1)
+// // ring.write(2)
+// //
+// // const readerA = new RingReader(ring)
+// //
+// // expect(readerA.read()).toBe(1)
+// // expect(readerA.read()).toBe(2)
+// //
+// // const readerB = new RingReader(ring)
+// //
+// // expect(readerB.read()).toBe(1)
+// // expect(readerB.read()).toBe(2)
+// //
+// // console.log('Test passed.')
+// //
+// // }());
+// //
+// // (function(){
+// //
+// // console.log('Test 8')
+// //
+// // const ring = new RingBuffer(2)
+// // ring.write(1)
+// // ring.write(2)
+// //
+// // const readerA = new RingReader(ring)
+// //
+// // expect(readerA.read()).toBe(1)
+// // expect(readerA.read()).toBe(2)
+// //
+// // ring.write(3)
+// //
+// // const readerB = new RingReader(ring)
+// //
+// // expect(readerB.read()).toBe(2)
+// // expect(readerB.read()).toBe(3)
+// //
+// // expect(readerA.read()).toBe(3)
+// //
+// // console.log('Test passed.')
+// //
+// // }());
+//
+(function(){
+
+console.log('Load test 9.')
+
+// Load test, read in order, with a random capacity between 9mm-10mm
+const min = 10000000,
+max = 10000000,
+random_capacity = Math.floor(Math.random() * (max - min + 1)) + min
+
+const ring = new RingBuffer(random_capacity)
+
+const start = new Date().getTime()
+
+// Fill must fill the random capacity
+for ( let x = 0; x < random_capacity; x ++){
+ring.write(x)
+}
+
+// Read the random capacity, in order
+for ( let y = 0; y < random_capacity; y ++){
+expect(ring.read()).toBe(y)
+}
+
+const end = new Date().getTime()
+console.log('Test passed, ' + random_capacity + ' executions in ' + (end - start) + 'ms' )
+
+}())
