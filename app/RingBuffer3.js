@@ -2,7 +2,7 @@ export class RingBuffer{
   constructor(slots){
     this.buffer = new Array(slots)
     this.capacity = slots
-    this.iterator = this.size = this.position = 0
+    this.size = this.position = 0
   }
   count(){
     return this.size
@@ -15,21 +15,16 @@ export class RingBuffer{
     return num
   }
   write(val){
-    const slot = this.iterator % this.capacity
-    this.iterator++
-    this.buffer[slot] = val
-    if (this.size < this.capacity) {
-      this.size++
-    } else{
-      this.position++
-    }
+    this.buffer[(this.size + this.position) < this.capacity ? this.size + this.position : (this.size + this.position) - this.capacity] = val
+
+    this.size < this.capacity ? this.size++ : this.position++
   }
 }
 
 export class RingReader extends RingBuffer{
   read() {
     const ring = super.read()
-    // console.log(ring.read())
+    console.log(ring.read())
     return ring.read()
     // console.log(ring.buffer[ring.position])
     // return ring.buffer[ring.position]
